@@ -2,7 +2,7 @@
 
 A simple command-line TCP port scanner written in Python using the built-in `socket` module. It checks a user-specified host and port range, then reports ports where a TCP connection succeeds.
 
-> **Use responsibly:** Run this tool only against `localhost`, your own devices, or systems for which you have explicit authorization.
+**Use responsibly:** Run this tool only against `localhost`, your own devices, or systems for which you have explicit authorization.
 
 ## Features
 
@@ -15,7 +15,7 @@ A simple command-line TCP port scanner written in Python using the built-in `soc
 - Validates port ranges from `1` to `65535`.
 - Allows the user to exit by entering `exit` at either input prompt.
 - Handles keyboard interruption with `Ctrl+C`.
-- Uses Python's built-in exception handling to manage input and network errors.
+- Handles input and network errors using Python exception handling.
 
 ## Requirements
 
@@ -25,17 +25,17 @@ A simple command-line TCP port scanner written in Python using the built-in `soc
 
 ## Run
 
-### 1. Clone or download the project
+### 1. Navigate to the project directory
 
 Make sure `main.py` is available on your computer.
 
-If you have cloned the repository, navigate to the project directory:
+If you have cloned the repository, navigate to the project directory. For example:
 
 ```bash
-cd python-port-scanner
+cd TCP_PORT_SCANNER
 ```
 
-Replace `python-port-scanner` with your actual project directory name if it is different.
+Replace `TCP_PORT_SCANNER` with your actual project directory name if it is different.
 
 ### 2. Run on Kali Linux or other Linux distributions
 
@@ -61,7 +61,7 @@ python main.py
 
 ### 4. Enter the target and port range
 
-When the program starts, it prompts you to enter a hostname or IP address:
+The program prompts you to enter a hostname or IP address:
 
 ```text
 Enter the host (or 'exit' to quit):
@@ -80,7 +80,7 @@ Enter the port range (e.g., 20-100):
 
 Use the format `START-END`, where both endpoints are included.
 
-For example:
+Examples:
 
 - `20-100`: scans ports 20 through 100.
 - `80-80`: scans only port 80.
@@ -92,9 +92,7 @@ Press `Ctrl+C` to interrupt the scan.
 
 ## Example
 
-The following is an illustrative example of a scan against the local machine.
-
-The open ports shown are examples only. Actual results depend on which services are listening on the target and whether connections are permitted.
+The following is an illustrative example of a scan against the local machine. The open port shown is only an example; actual results depend on which services are listening and whether connections are permitted.
 
 ```text
 Enter the host (or 'exit' to quit):
@@ -105,8 +103,6 @@ Scanning 127.0.0.1, ports 8000-8010...
 Port 8000 is open on 127.0.0.1.
 Open ports on 127.0.0.1: 8000
 ```
-
-In this example, port `8000` accepts a TCP connection.
 
 To reproduce this result in a local test environment, open another terminal and start a simple HTTP server:
 
@@ -122,17 +118,15 @@ If no port in the specified range accepts a TCP connection, the program displays
 No open ports found in the specified range.
 ```
 
-If you want to exit the program, enter `exit` when prompted for the host or port range.
-
 ## How It Works
 
 1. **Create a TCP socket:** `socket.AF_INET` selects IPv4, while `socket.SOCK_STREAM` creates a stream socket commonly used for TCP.
-2. **Set a timeout:** `settimeout(1)` limits each connection attempt to approximately one second of waiting time.
+2. **Set a timeout:** `settimeout(1)` limits the waiting time for each connection attempt to approximately one second.
 3. **Try to connect:** `connect_ex((host, port))` attempts to establish a TCP connection. A return value of `0` indicates that the connection succeeded.
 4. **Check each port:** A `for` loop iterates through the specified range, including the starting and ending ports.
 5. **Collect results:** Successful connection attempts are added to the `open_ports` list.
 6. **Display results:** The program prints each open port and displays the complete list of open ports after the scan.
-7. **Handle errors:** The program catches invalid input, network-related `OSError` exceptions, keyboard interruptions, and other unexpected exceptions.
+7. **Handle errors:** The program handles invalid input, network-related `OSError` exceptions, keyboard interruptions, and other unexpected exceptions.
 
 ## Input Format
 
@@ -168,7 +162,7 @@ Enter the port range in `START-END` format.
 - Record elapsed scan time and display a progress indicator.
 - Export results to JSON or TXT files.
 - Add service detection and basic banner inspection.
-- Add unit tests for port-range validation and connection-result handling.
+- Expand unit tests for port-range validation and connection-result handling.
 - Improve error classification and logging.
 - Consider IPv6 support.
 
